@@ -28,6 +28,7 @@ const Student = () => {
         <table className="min-w-full bg-white rounded-lg shadow-sm">
           <thead>
             <tr className="bg-green-500 text-white text-left">
+              <th className="py-3 px-4 font-medium">Student Id</th>
               <th className="py-3 px-4 font-medium">Name</th>
               <th className="py-3 px-4 font-medium">Father Name</th>
               <th className="py-3 px-4 font-medium">Address</th>
@@ -47,6 +48,7 @@ const Student = () => {
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
                 } hover:bg-green-50 transition-colors`}
               >
+                <td className="py-3 px-4 text-gray-700">{student.id}</td>
                 <td className="py-3 px-4 text-gray-700">{student.name}</td>
                 <td className="py-3 px-4 text-gray-700">
                   {student.father_name}
