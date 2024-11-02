@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.spinner {
+ width: 48px;
+ height: 48px;
+ border: 6px solid rgba(0, 0, 0, 0.1);
+ border-top-color: #4a90e2; /* Blue color for a nice gradient */
+ border-radius: 50%;
+ animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+ to {
+   transform: rotate(360deg);
+ }
+}
