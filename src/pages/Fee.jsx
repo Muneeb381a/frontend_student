@@ -32,7 +32,7 @@ const Fee = () => {
       <h2 className="text-3xl font-extrabold text-gray-800 mb-8">Fee List</h2>
         <button>
           <Link to="/add-fee" className="text-center bg-green-600 p-4 rounded-full font-bold text-white">
-            Add Class
+            Add Student Fee
           </Link>
         </button>
       </div>
