@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Fee = () => {
   const [fees, setFees] = useState([]);
@@ -26,7 +27,15 @@ const Fee = () => {
 
   return (
     <div className="p-8 bg-gray-100 rounded-lg shadow-xl">
+      
+      <div className="flex items-center justify-between mb-2">
       <h2 className="text-3xl font-extrabold text-gray-800 mb-8">Fee List</h2>
+        <button>
+          <Link to="/add-fee" className="text-center bg-green-600 p-4 rounded-full font-bold text-white">
+            Add Class
+          </Link>
+        </button>
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-lg">
           <thead>
