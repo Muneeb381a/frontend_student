@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GrUserManager } from "react-icons/gr";
 
 const Student = () => {
   const [students, setStudents] = useState([]);
@@ -43,6 +44,7 @@ const Student = () => {
             <thead>
               <tr className="bg-green-500 text-white text-left">
                 <th className="py-3 px-4 font-medium">Student Id</th>
+                <th className="py-3 px-4 font-medium">Student Pic</th>
                 <th className="py-3 px-4 font-medium">Name</th>
                 <th className="py-3 px-4 font-medium">Father Name</th>
                 <th className="py-3 px-4 font-medium">Address</th>
@@ -61,6 +63,15 @@ const Student = () => {
                   className={`border-b ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-green-50 transition-colors`}
                 >
                   <td className="py-3 px-4 text-gray-700">{student.id}</td>
+                  <td className="py-3 px-4 text-gray-700">
+                    {
+                      student.profile_pic ? (
+                        <img src={student.profile_pic} alt={student.name} className="w-[32px] h-[32px] rounded-full bg-gray-400"/>
+                      ) : (
+                        <GrUserManager className="w-[32px] h-[32px] text-gray-700 bg-gray-400 rounded-full" />
+                      )
+                    }
+                  </td>
                   <td className="py-3 px-4 text-gray-700">{student.name}</td>
                   <td className="py-3 px-4 text-gray-700">{student.father_name}</td>
                   <td className="py-3 px-4 text-gray-700">{student.address}</td>
