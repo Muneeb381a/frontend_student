@@ -10,6 +10,7 @@ import Subject from "./pages/Subject"
 import StudentForm from "./pages/StudentForm";
 import ClassForm from "./pages/ClassForm";
 import FeeForm from "./pages/FeeForm";
+import EditStudent from "./pages/EditStudent";
 
 function App() {
   
@@ -26,6 +27,7 @@ function App() {
         <Route path="/add-student" element={<StudentForm />} />
         <Route path="/add-class" element={<ClassForm />} />
         <Route path="/add-fee" element={<FeeForm />} />
+        <Route path="/edit-student/:id" element={<EditStudent />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

@@ -72,7 +72,7 @@ const Student = () => {
                       )
                     }
                   </td>
-                  <td className="py-3 px-4 text-gray-700">{student.name}</td>
+                  <td className="py-3 px-4 text-gray-700"><Link to={`/edit-student/${student.id}`}>{student.name}</Link></td>
                   <td className="py-3 px-4 text-gray-700">{student.father_name}</td>
                   <td className="py-3 px-4 text-gray-700">{student.address}</td>
                   <td className="py-3 px-4 text-gray-700">{student.phone_number}</td>
