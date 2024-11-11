@@ -10,7 +10,7 @@ const Student = () => {
     const fetchStudents = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://bakend-student.vercel.app/api/students");
+        const response = await fetch("http://localhost:3000/api/students");
         const data = await response.json();
         setStudents(data);
       } catch (error) {
