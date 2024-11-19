@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Class = () => {
   const [classes, setClasses] = useState([]);
-  const history = useHistory(); 
+  const navigate = useNavigate(); 
 
-  
   const formatDate = (date) => {
     const options = {
       weekday: 'short',  
@@ -46,11 +45,13 @@ const Class = () => {
     fetchClasses();
   }, []);
 
+
   const handleEdit = (classId) => {
-    history.push(`/edit-class/${classId}`);
+    
+    navigate(`/edit-class/${classId}`);  
   };
 
-  // Handle Delete button click
+
   const handleDelete = async (classId) => {
     if (window.confirm("Are you sure you want to delete this class?")) {
       try {
@@ -59,7 +60,6 @@ const Class = () => {
         });
 
         if (response.ok) {
-          
           setClasses(classes.filter(cls => cls.id !== classId));
           alert("Class deleted successfully.");
         } else {
@@ -92,7 +92,7 @@ const Class = () => {
               <th className="py-3 px-4 font-medium">Section</th>
               <th className="py-3 px-4 font-medium">Created At</th>
               <th className="py-3 px-4 font-medium">Updated At</th>
-              <th className="py-3 px-4 font-medium">Actions</th>  {/* Added Actions column */}
+              <th className="py-3 px-4 font-medium">Actions</th>  
             </tr>
           </thead>
           <tbody>
