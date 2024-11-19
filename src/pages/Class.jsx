@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 const Class = () => {
   const [classes, setClasses] = useState([]);
+  const history = useHistory(); 
 
-  // function to format date an time make it human readable
-
+  
   const formatDate = (date) => {
     const options = {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
+      weekday: 'short',  
+      year: 'numeric',   
+      month: 'short',    
+      day: 'numeric',    
+      hour: '2-digit',   
+      minute: '2-digit', 
+      hour12: true,      
+      timeZone: 'Asia/Karachi',  
     };
 
-    return new Date(date).toLocaleDateString('en-US', options);
+    return new Date(date).toLocaleString('en-US', options);
   };
+
   useEffect(() => {
     const fetchClasses = async () => {
       try {
@@ -25,7 +28,6 @@ const Class = () => {
         const data = await response.json();
 
         if (response.ok) {
-          // Format created_at and updated_at for each class
           const formattedClasses = data.map((cls) => ({
             ...cls,
             created_at: formatDate(cls.created_at),
@@ -44,6 +46,31 @@ const Class = () => {
     fetchClasses();
   }, []);
 
+  const handleEdit = (classId) => {
+    history.push(`/edit-class/${classId}`);
+  };
+
+  // Handle Delete button click
+  const handleDelete = async (classId) => {
+    if (window.confirm("Are you sure you want to delete this class?")) {
+      try {
+        const response = await fetch(`http://localhost:3000/api/class/${classId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          
+          setClasses(classes.filter(cls => cls.id !== classId));
+          alert("Class deleted successfully.");
+        } else {
+          alert("Failed to delete the class.");
+        }
+      } catch (error) {
+        console.error("Error deleting class:", error);
+        alert("An error occurred while deleting the class.");
+      }
+    }
+  };
 
   return (
     <div className="p-8 bg-gray-50 rounded-lg shadow-lg">
@@ -56,7 +83,6 @@ const Class = () => {
         </button>
       </div>
 
-
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-sm">
           <thead>
@@ -66,19 +92,32 @@ const Class = () => {
               <th className="py-3 px-4 font-medium">Section</th>
               <th className="py-3 px-4 font-medium">Created At</th>
               <th className="py-3 px-4 font-medium">Updated At</th>
+              <th className="py-3 px-4 font-medium">Actions</th>  {/* Added Actions column */}
             </tr>
           </thead>
           <tbody>
             {classes.map((cls) => (
-              <tr
-                key={cls.class_id}
-                className="border-b hover:bg-blue-50 transition-colors"
-              >
+              <tr key={cls.id} className="border-b hover:bg-blue-50 transition-colors">
                 <td className="py-3 px-4 text-gray-700">{cls.id}</td>
                 <td className="py-3 px-4 text-gray-700">{cls.class_name}</td>
                 <td className="py-3 px-4 text-gray-700">{cls.section}</td>
                 <td className="py-3 px-4 text-gray-700">{cls.created_at}</td>
                 <td className="py-3 px-4 text-gray-700">{cls.updated_at}</td>
+                <td className="py-3 px-4 text-gray-700">
+                  {/* Edit and Delete buttons */}
+                  <button 
+                    onClick={() => handleEdit(cls.id)} 
+                    className="text-blue-500 hover:text-blue-700 mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    onClick={() => handleDelete(cls.id)} 
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
