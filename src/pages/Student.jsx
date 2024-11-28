@@ -64,30 +64,36 @@ const Student = () => {
                 >
                   <td className="py-3 px-4 text-gray-700">{student.id}</td>
                   <td className="py-3 px-4 text-gray-700">
-                    {
-                      student.profile_pic ? (
-                        <img src={student.profile_pic} alt={student.name} className="w-[32px] h-[32px] rounded-full bg-gray-400"/>
-                      ) : (
-                        <GrUserManager className="w-[32px] h-[32px] text-gray-700 bg-gray-400 rounded-full" />
-                      )
-                    }
+                    {student.profile_pic ? (
+                      <img
+                        src={student.profile_pic}
+                        alt={student.name}
+                        className="w-[32px] h-[32px] rounded-full bg-gray-400"
+                      />
+                    ) : (
+                      <GrUserManager className="w-[32px] h-[32px] text-gray-700 bg-gray-400 rounded-full" />
+                    )}
                   </td>
-                  <td className="py-3 px-4 text-gray-700"><Link to={`/edit-student/${student.id}`}>{student.name}</Link></td>
+                  <td className="py-3 px-4 text-gray-700">
+                    <Link to={`/edit-student/${student.id}`}>{student.name}</Link>
+                  </td>
                   <td className="py-3 px-4 text-gray-700">{student.father_name}</td>
-                  <td className="py-3 px-4 text-gray-700">{student.address}</td>
-                  <td className="py-3 px-4 text-gray-700">{student.phone_number}</td>
+                  <td className="py-3 px-4 text-gray-700">{student.address_1}</td>
+                  <td className="py-3 px-4 text-gray-700">{student.phone_number_with_code}</td>
                   <td className="py-3 px-4 text-gray-700">{student.email}</td>
                   <td className="py-3 px-4 text-gray-700">{student.roll_no}</td>
                   <td className="py-3 px-4 text-gray-700">{student.class_name || "N/A"}</td>
-                  <td className="py-3 px-4 text-gray-700">{student.fee_amount || "N/A"}</td>
+                  <td className="py-3 px-4 text-gray-700">Rs. {student.amount || "0.00"}</td>
                   <td
-                    className={`py-3 px-4 ${
+                    className={`py-3 px-4 text-white text-center font-bold ${
                       student.fee_status === "Paid"
-                        ? "bg-green-600 text-center text-white font-bold"
-                        : "bg-red-600 text-center text-white font-bold"
+                        ? "bg-green-600"
+                        : student.status === "Unpaid"
+                        ? "bg-red-600"
+                        : "bg-yellow-500"
                     }`}
                   >
-                    {student.fee_status || "N/A"}
+                    {student.status || "Pending"}
                   </td>
                 </tr>
               ))}
