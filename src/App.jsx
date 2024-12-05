@@ -12,6 +12,7 @@ import ClassForm from "./pages/ClassForm";
 import FeeForm from "./pages/FeeForm";
 import EditStudent from "./pages/EditStudent";
 import Dashboard from "./pages/Dashboard";
+import AttendanceForm from "./pages/AttendanceForm";
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
         <Route path="/add-fee" element={<FeeForm />} />
         <Route path="/edit-student/:id" element={<EditStudent />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/attendance" element={<AttendanceForm />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
